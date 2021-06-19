@@ -21,8 +21,8 @@ class CreateRoleUserTable extends Migration
         Schema::disableForeignKeyConstraints();
         if (! Schema::hasTable($this->table_name)) {
             Schema::create($this->table_name, function (Blueprint $table) {
-                $table->bigInteger('user_id', false, true);
-                $table->integer('role_id')->unsigned();
+                $table->foreignId('user_id');
+                $table->foreignId('role_id');
                 $table->primary(['user_id', 'role_id']);
             });
         }

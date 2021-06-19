@@ -2,8 +2,11 @@
 
 namespace Metrix\LaravelPermissions\Models;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Metrix\LaravelPermissions\Database\Factories\RoleFactory;
 
 /**
  * Roles - Users can belong to many roles.
@@ -18,6 +21,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  */
 class Role extends Model
 {
+    use HasFactory;
+
     /**
      * The database table name.
      *
@@ -35,6 +40,13 @@ class Role extends Model
     ];
 
     /**
+     * The model does not use timestamps
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * Define attributes to have fields
      * present when new'ing a model.
      *
@@ -46,6 +58,16 @@ class Role extends Model
         'description' => null,
         'filter'      => null,
     ];
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    protected static function newFactory(): Factory
+    {
+        return RoleFactory::new();
+    }
 
     /*
     |--------------------------------------------------------------------------
