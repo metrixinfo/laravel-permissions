@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 
 /**
  * Class LaravelPermissionsServiceProvider
- * 
+ *
  * @package Metrix\LaravelPermissions
  */
 class LaravelPermissionsServiceProvider extends ServiceProvider
@@ -30,12 +30,11 @@ class LaravelPermissionsServiceProvider extends ServiceProvider
         // $this->loadRoutesFrom(__DIR__.'/routes.php');
 
         if ($this->app->runningInConsole()) {
-
             $this->publishes([
-                __DIR__.'/../config/config.php' => config_path('laravel-permissions.php'),
+                __DIR__ . '/../config/config.php' => config_path('laravel-permissions.php'),
             ], 'config');
 
-            $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+            $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
             // Publishing the views.
             /*$this->publishes([
@@ -63,7 +62,7 @@ class LaravelPermissionsServiceProvider extends ServiceProvider
     public function register()
     {
         // Automatically apply the package configuration
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'laravel-permissions');
+        $this->mergeConfigFrom(__DIR__ . '/../config/config.php', 'laravel-permissions');
 
         // Register the main class to use with the facade
         $this->app->singleton('laravel-permissions', function () {

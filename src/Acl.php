@@ -2,11 +2,11 @@
 
 namespace Metrix\LaravelPermissions;
 
-use Metrix\LaravelPermissions\Models\Permission;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use Metrix\LaravelPermissions\Models\Permission;
 
 /**
  * Class LaravelPermissions
@@ -58,7 +58,7 @@ class Acl
     /**
      * @var string|null;
      */
-    private ?string $filter;
+    private ?string $filter = null;
 
 
     /**
@@ -196,7 +196,7 @@ class Acl
             ->select('permission_id', 'actions')
             ->whereExists(function ($query) {
                 $query->select(DB::raw(1))
-                    ->from('user_roles')
+                    ->from('role_user')
                     ->where('user_id', '=', $this->user_id);
             })->get();
 
@@ -214,8 +214,8 @@ class Acl
     {
         $results = DB::table('role_user')
             ->select('roles.id', 'roles.name', 'roles.filter')
-            ->leftJoin('roles', 'user_roles.role_id', '=', 'roles.id')
-            ->where('user_roles.user_id', $this->user_id)
+            ->leftJoin('roles', 'role_user.role_id', '=', 'roles.id')
+            ->where('role_user.user_id', $this->user_id)
             ->orderBy('roles.id', 'desc')
             ->get();
 

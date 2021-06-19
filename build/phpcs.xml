@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<ruleset name="PHP_CodeSniffer">
+
+    <description>The coding standard for PHP_CodeSniffer itself.</description>
+
+    <config name="installed_paths" value="../../slevomat/coding-standard"/>
+
+    <exclude-pattern>*/Standards/*/Tests/*.(inc|css|js)</exclude-pattern>
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/node_modules/*</exclude-pattern>
+
+    <file>.././src</file>
+
+    <arg name="basepath" value=""/>
+    <arg name="colors" />
+    <arg name="parallel" value="75" />
+    <arg value="np"/>
+
+    <!-- Don't hide tokenizer exceptions -->
+    <rule ref="Internal.Tokenizer.Exception">
+        <type>error</type>
+    </rule>
+
+    <!-- All PHP files MUST use the Unix LF (linefeed) line ending. -->
+    <rule ref="Generic.Files.LineEndings">
+        <properties>
+            <property name="eolChar" value="\n"/>
+        </properties>
+    </rule>
+
+    <rule ref="PSR1" />
+    <rule ref="PSR2" />
+
+    <rule ref="Generic.Files.LineLength.TooLong">
+        <exclude-pattern>*.php</exclude-pattern>
+    </rule>
+
+    <rule ref="Generic.PHP.DisallowShortOpenTag"/>
+    <rule ref="Generic.PHP.LowerCaseConstant" />
+
+    <rule ref="SlevomatCodingStandard.Classes.EmptyLinesAroundClassBraces">
+        <properties>
+            <property name="linesCountAfterOpeningBrace" value="0"/>
+            <property name="linesCountBeforeClosingBrace" value="0"/>
+        </properties>
+    </rule>
+    <rule ref="SlevomatCodingStandard.Namespaces.UseDoesNotStartWithBackslash"/>
+    <rule ref="SlevomatCodingStandard.Classes.ClassConstantVisibility"/>
+    <rule ref="SlevomatCodingStandard.Arrays.TrailingArrayComma"/>
+    <rule ref="SlevomatCodingStandard.Namespaces.UnusedUses">
+        <properties>
+            <property name="searchAnnotations" type="boolean" value="true"/>
+        </properties>
+    </rule>
+    <rule ref="SlevomatCodingStandard.Namespaces.NamespaceSpacing">
+        <properties>
+            <property name="linesCountBeforeNamespace" type="number" value="1"/>
+            <property name="linesCountAfterNamespace" type="number" value="1"/>
+        </properties>
+    </rule>
+
+    <rule ref="SlevomatCodingStandard.Namespaces.AlphabeticallySortedUses"/>
+
+    <rule ref="Squiz.Commenting.ClassComment" />
+    <rule ref="Squiz.Strings.DoubleQuoteUsage" />
+    <rule ref="Squiz.Strings.DoubleQuoteUsage.ContainsVar">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.WhiteSpace.OperatorSpacing">
+        <properties>
+            <property name="ignoreNewlines" value="true" />
+        </properties>
+    </rule>
+    <rule ref="Squiz.Strings.ConcatenationSpacing">
+        <properties>
+            <property name="spacing" value="1" />
+            <property name="ignoreNewlines" value="true" />
+        </properties>
+    </rule>
+
+</ruleset>

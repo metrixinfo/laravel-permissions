@@ -2,9 +2,13 @@
 
 namespace Metrix\LaravelPermissions\Models;
 
+use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Metrix\LaravelPermissions\Database\Factories\PermissionFactory;
+use Metrix\LaravelPermissions\Models\Role;
 
 /**
  * Permission Model
@@ -57,11 +61,21 @@ class Permission extends Model
         'description' => null,
     ];
 
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    protected static function newFactory(): Factory
+    {
+        return PermissionFactory::new();
+    }
+
     /*
-    |--------------------------------------------------------------------------
-    | Model Relationships - Method names use snake_case
-    |--------------------------------------------------------------------------
-    */
+|--------------------------------------------------------------------------
+| Model Relationships - Method names use snake_case
+|--------------------------------------------------------------------------
+*/
 
     // phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 
