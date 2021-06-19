@@ -1,13 +1,13 @@
 <?php
 
-namespace Metrix\LaravelPermissions;
+namespace Metrix\LaravelPermissions\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
  * @see \Metrix\LaravelPermissions\Skeleton\SkeletonClass
  */
-class LaravelPermissionsFacade extends Facade
+class Acl extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -16,6 +16,6 @@ class LaravelPermissionsFacade extends Facade
      */
     protected static function getFacadeAccessor(): string
     {
-        return 'laravel-permissions';
+        return \Metrix\LaravelPermissions\Acl::class;
     }
 }
