@@ -5,6 +5,11 @@ namespace Metrix\LaravelPermissions;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * Class LaravelPermissionsServiceProvider
+ * 
+ * @package Metrix\LaravelPermissions
+ */
 class LaravelPermissionsServiceProvider extends ServiceProvider
 {
     /**
