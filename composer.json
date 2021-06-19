@@ -56,7 +56,7 @@
                 "Metrix\\LaravelPermissions\\LaravelPermissionsServiceProvider"
             ],
             "aliases": {
-                "LaravelPermissions": "Metrix\\LaravelPermissions\\LaravelPermissionsFacade"
+                "Acl": "Metrix\\LaravelPermissions\\LaravelPermissionsFacade"
             }
         }
     }

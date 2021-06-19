@@ -2,7 +2,6 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/metrixinfo/laravel-permissions.svg?style=flat-square)](https://packagist.org/packages/metrixinfo/laravel-permissions)
 [![Total Downloads](https://img.shields.io/packagist/dt/metrixinfo/laravel-permissions.svg?style=flat-square)](https://packagist.org/packages/metrixinfo/laravel-permissions)
-![GitHub Actions](https://github.com/metrixinfo/laravel-permissions/actions/workflows/main.yml/badge.svg)
 
 Laravel permissions allows you to create permissions and roles.
 You can assign one or many roles to a user, and they will inherit the permissions assigned to those roles.
