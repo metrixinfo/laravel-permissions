@@ -1,0 +1,54 @@
+{
+    "name": "metrixinfo/laravel-permissions",
+    "description": "Fine grain user, group and role permissions",
+    "keywords": [
+        "metrixinfo",
+        "laravel-permissions"
+    ],
+    "homepage": "https://github.com/metrixinfo/laravel-permissions",
+    "license": "GPL-2.0-or-later",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Michael Love",
+            "email": "mike@metrixinfo.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0",
+        "illuminate/support": "^8.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Metrixinfo\\LaravelPermissions\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Metrixinfo\\LaravelPermissions\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Metrixinfo\\LaravelPermissions\\LaravelPermissionsServiceProvider"
+            ],
+            "aliases": {
+                "LaravelPermissions": "Metrixinfo\\LaravelPermissions\\LaravelPermissionsFacade"
+            }
+        }
+    }
+}
