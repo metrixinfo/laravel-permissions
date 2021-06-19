@@ -2,6 +2,7 @@
 
 namespace Metrix\LaravelPermissions;
 
+use Illuminate\Auth\Events\Authenticated;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 
@@ -17,7 +18,10 @@ class LaravelPermissionsServiceProvider extends ServiceProvider
      */
     public function boot(Acl $acl)
     {
-        $acl->boot(Auth::id());
+        $this->app['events']->listen(Authenticated::class, function ($e) use($acl) {
+            $acl->boot(Auth::id());
+        });
+
 
         /*
          * Optional methods to load your package assets
@@ -63,8 +67,18 @@ class LaravelPermissionsServiceProvider extends ServiceProvider
         // $this->mergeConfigFrom(__DIR__ . '/../config/config.php', 'laravel-permissions');
 
         // Register the main class to use with the facade
-        $this->app->singleton('laravel-permissions', function () {
+        $this->app->singleton(Acl::class, function () {
             return new Acl();
         });
+    }
+
+    /**
+     * What we are providing.
+     *
+     * @return array
+     */
+    public function provides(): array
+    {
+        return [Acl::class];
     }
 }
