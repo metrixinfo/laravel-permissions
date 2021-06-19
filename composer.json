@@ -25,12 +25,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Metrixinfo\\LaravelPermissions\\": "src"
+            "Metrix\\LaravelPermissions\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Metrixinfo\\LaravelPermissions\\Tests\\": "tests"
+            "Metrix\\LaravelPermissions\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -44,10 +44,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Metrixinfo\\LaravelPermissions\\LaravelPermissionsServiceProvider"
+                "Metrix\\LaravelPermissions\\LaravelPermissionsServiceProvider"
             ],
             "aliases": {
-                "LaravelPermissions": "Metrixinfo\\LaravelPermissions\\LaravelPermissionsFacade"
+                "LaravelPermissions": "Metrix\\LaravelPermissions\\LaravelPermissionsFacade"
             }
         }
     }

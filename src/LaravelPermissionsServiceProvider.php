@@ -30,6 +30,8 @@ class LaravelPermissionsServiceProvider extends ServiceProvider
                 __DIR__.'/../config/config.php' => config_path('laravel-permissions.php'),
             ], 'config');
 
+            $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+
             // Publishing the views.
             /*$this->publishes([
                 __DIR__.'/../resources/views' => resource_path('views/vendor/laravel-permissions'),
