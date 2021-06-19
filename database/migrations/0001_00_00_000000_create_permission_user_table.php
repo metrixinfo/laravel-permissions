@@ -16,21 +16,24 @@ class CreatePermissionUserTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::disableForeignKeyConstraints();
-
         if (! Schema::hasTable($this->table_name)) {
             Schema::create($this->table_name, function (Blueprint $table) {
-                $table->bigInteger('user_id', false, true);
-                $table->integer('permission_id')->unsigned();
-                $table->tinyInteger('actions')->default(0);
+                $table->foreignId('user_id');
+                $table->foreignId('permission_id');
+                $table->tinyInteger('actions', false, true)->default(0);
                 $table->timestamps();
-                $table->foreign('permission_id')->references('id')->on('permissions');
                 $table->primary(['user_id', 'permission_id']);
+//                $table->foreign('permission_id')
+//                    ->references('id')
+//                    ->on('permissions');
+//                $table->foreign('user_id')
+//                    ->references('id')
+//                    ->on('users');
             });
         }
-
         Schema::enableForeignKeyConstraints();
     }
 
@@ -39,7 +42,7 @@ class CreatePermissionUserTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::disableForeignKeyConstraints();
         Schema::dropIfExists($this->table_name);
