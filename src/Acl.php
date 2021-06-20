@@ -60,6 +60,19 @@ class Acl
      */
     private ?string $filter = null;
 
+    /**
+     * @var int;
+     */
+    private int $cache_ttl = 86400;
+
+
+    /**
+     * Acl constructor.
+     */
+    public function __construct()
+    {
+        $this->cache_ttl = \config('permissions.cache_ttl', 86400);
+    }
 
     /**
      * Boot the class by fetching the users permissions
@@ -145,7 +158,7 @@ class Acl
         ];
 
         // Store it in cache for a day.
-        Cache::tags(['acl', 'acl:' . $this->user_id])->put('acl:' . $this->user_id . ':' . $this->session_id, \serialize($permissions), 86400);
+        Cache::tags(['acl', 'acl:' . $this->user_id])->put('acl:' . $this->user_id . ':' . $this->session_id, \serialize($permissions), $this->cache_ttl);
     }
 
     /**

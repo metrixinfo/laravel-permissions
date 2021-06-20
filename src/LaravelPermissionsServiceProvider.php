@@ -24,7 +24,12 @@ class LaravelPermissionsServiceProvider extends ServiceProvider
         });
 
         if ($this->app->runningInConsole()) {
+
             $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+
+            $this->publishes([
+                __DIR__.'/../config/config.php' => config_path('permissions.php'),
+            ], 'permissions');
 
             // Registering package commands.
             $this->commands([
@@ -38,6 +43,8 @@ class LaravelPermissionsServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'permissions');
+
         // Register the main class to use with the facade
         $this->app->singleton(Acl::class, function () {
             return new Acl();
