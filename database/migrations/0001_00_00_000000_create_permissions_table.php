@@ -22,9 +22,10 @@ class CreatePermissionsTable extends Migration
 
         if (! Schema::hasTable($this->table_name)) {
             Schema::create($this->table_name, function (Blueprint $table) {
-                $table->increments('id');
+                $table->bigIncrements('id');
                 $table->string('area');
                 $table->string('description')->nullable();
+                $table->unique('area');
             });
         }
 

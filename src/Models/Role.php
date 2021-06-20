@@ -2,6 +2,7 @@
 
 namespace Metrix\LaravelPermissions\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -16,6 +17,7 @@ use Metrix\LaravelPermissions\Database\Factories\RoleFactory;
  * @property string $description
  * @property string $filter
  *
+ * @property Collection $permissions
  *
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
@@ -95,7 +97,7 @@ class Role extends Model
      */
     public function permissions(): BelongsToMany
     {
-        return $this->belongsToMany(Permission::class, 'role_permissions')->withPivot('actions');
+        return $this->belongsToMany(Permission::class)->withPivot('actions');
     }
 
     // phpcs:enable PSR1.Methods.CamelCapsMethodName.NotCamelCaps

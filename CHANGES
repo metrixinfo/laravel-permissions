@@ -1,5 +1,5 @@
 Version 0.1.1:
- - Update ReadMe Use a config file for the cache ttl.
+ - Add artisan command to manage permissions (acl:permissions).
 
 Version 0.1.0
  - Alpha Release

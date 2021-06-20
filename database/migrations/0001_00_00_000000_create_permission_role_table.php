@@ -26,12 +26,16 @@ class CreatePermissionRoleTable extends Migration
                 $table->foreignId('permission_id');
                 $table->tinyInteger('actions')->default(0);
                 $table->primary(['role_id', 'permission_id']);
-//                $table->foreign('permission_id')
-//                      ->references('id')
-//                      ->on('permissions');
-//                $table->foreign('role_id')
-//                      ->references('id')
-//                      ->on('roles');
+                $table->foreign('permission_id')
+                    ->references('id')
+                    ->on('permissions')
+                    ->onDelete('restrict')
+                    ->onUpdate('restrict');
+                $table->foreign('role_id')
+                    ->references('id')
+                    ->on('roles')
+                    ->onDelete('restrict')
+                    ->onUpdate('restrict');
             });
         }
 

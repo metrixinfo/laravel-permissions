@@ -24,6 +24,16 @@ class CreateRoleUserTable extends Migration
                 $table->foreignId('user_id');
                 $table->foreignId('role_id');
                 $table->primary(['user_id', 'role_id']);
+                $table->foreign('user_id')
+                    ->references('id')
+                    ->on('users')
+                    ->cascadeOnDelete()
+                    ->cascadeOnUpdate();
+                $table->foreign('role_id')
+                    ->references('id')
+                    ->on('roles')
+                    ->cascadeOnDelete()
+                    ->cascadeOnUpdate();
             });
         }
         Schema::enableForeignKeyConstraints();

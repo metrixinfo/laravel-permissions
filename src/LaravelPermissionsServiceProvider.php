@@ -6,6 +6,7 @@ use Illuminate\Auth\Events\Authenticated;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use Metrix\LaravelPermissions\Console\ClearPermissionCache;
+use Metrix\LaravelPermissions\Console\ManagePermissions;
 
 /**
  *  Laravel Permissions Service Provider
@@ -24,16 +25,16 @@ class LaravelPermissionsServiceProvider extends ServiceProvider
         });
 
         if ($this->app->runningInConsole()) {
-
             $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
             $this->publishes([
-                __DIR__.'/../config/config.php' => config_path('permissions.php'),
+                __DIR__ . '/../config/config.php' => config_path('permissions.php'),
             ], 'permissions');
 
             // Registering package commands.
             $this->commands([
                 ClearPermissionCache::class,
+                ManagePermissions::class,
             ]);
         }
     }
@@ -43,7 +44,7 @@ class LaravelPermissionsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'permissions');
+        $this->mergeConfigFrom(__DIR__ . '/../config/config.php', 'permissions');
 
         // Register the main class to use with the facade
         $this->app->singleton(Acl::class, function () {

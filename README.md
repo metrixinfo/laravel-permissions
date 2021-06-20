@@ -31,6 +31,26 @@ The migrations will create the following tables:
 - permission_user
 - permission_role
 
+Foreign Key constraints are enforced to guarantee data integrity. 
+If you will be refreshing your database in your local environment 
+you will need to disable them in the ```down()``` method of your ```users``` table migration.
+
+*database/migrations/02014_10_12_000000_create_users_table.php*
+
+```php 
+ /**
+  * Reverse the migrations.
+  *
+  * @return void
+  */
+ public function down(): void
+ {
+     Schema::disableForeignKeyConstraints();
+     Schema::dropIfExists('users');
+     Schema::enableForeignKeyConstraints();
+ }
+```
+
 ## Usage
 
 Include the following two traits in your User Model.
@@ -99,7 +119,7 @@ php artisan vendor:publish --provider="Metrix\LaravelPermissions\LaravelPermissi
 ```
 
 ## Console Command
-A console command is provided to allow you to flush the permissions from the cache.
+Console commands are provided to help manage your permissions. 
 
 You can flush all the permissions:
 ```bash
@@ -110,9 +130,28 @@ or only the permissions belonging to a specific user.
 php artisan acl:clear -u 212
 ```
 
+You can also add, edit, delete assign, revoke and audit permissions using the permissions command.
+```bash
+php artisan acl:permissions
+```
+
+It will present you with a menu to allow yo to perform different permission actions.
+
+```bash
+ What would you like to do?:
+  [1] List Permissions
+  [2] Create Permission
+  [3] Edit Permission
+  [4] Delete Permission
+  [5] Assign Permission
+  [6] Revoke Permission
+  [7] Audit Permissions
+  [0] Quit
+```
+
 ### Changelog
 
-Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+Please see [CHANGELOG](CHANGELOG) for more information what has changed recently.
 
 ## Contributing
 

@@ -24,14 +24,17 @@ class CreatePermissionUserTable extends Migration
                 $table->foreignId('user_id');
                 $table->foreignId('permission_id');
                 $table->tinyInteger('actions', false, true)->default(0);
-                $table->timestamps();
                 $table->primary(['user_id', 'permission_id']);
-//                $table->foreign('permission_id')
-//                    ->references('id')
-//                    ->on('permissions');
-//                $table->foreign('user_id')
-//                    ->references('id')
-//                    ->on('users');
+                $table->foreign('permission_id')
+                    ->references('id')
+                    ->on('permissions')
+                    ->cascadeOnDelete()
+                    ->cascadeOnUpdate();
+                $table->foreign('user_id')
+                    ->references('id')
+                    ->on('users')
+                    ->cascadeOnDelete()
+                    ->cascadeOnUpdate();
             });
         }
         Schema::enableForeignKeyConstraints();

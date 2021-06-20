@@ -21,10 +21,11 @@ class CreateRolesTable extends Migration
         Schema::disableForeignKeyConstraints();
         if (! Schema::hasTable($this->table_name)) {
             Schema::create($this->table_name, function (Blueprint $table) {
-                $table->increments('id');
+                $table->bigIncrements('id');
                 $table->string('name');
                 $table->string('description')->nullable();
                 $table->char('filter', 1)->nullable();
+                $table->unique('name');
             });
         }
         Schema::enableForeignKeyConstraints();
