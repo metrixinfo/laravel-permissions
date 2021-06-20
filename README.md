@@ -8,6 +8,8 @@ Laravel permissions allows you to create permissions and roles.
 You can assign one or many roles to a user, and they will inherit the permissions assigned to those roles.
 You may also assign specific permissions to a user. 
 
+## Requirements
+This package will only work with a cache that allows tags (Redis, Memcached etc.). 
 
 ## Installation
 

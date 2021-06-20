@@ -13,7 +13,7 @@ use Metrix\LaravelPermissions\Traits\HasPermissions;
 use Metrix\LaravelPermissions\Traits\HasRoles;
 
 /**
- * Class User for testing
+ * Class User for testing only
  */
 class User extends Model implements AuthorizableContract, AuthenticatableContract
 {
