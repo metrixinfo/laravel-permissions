@@ -96,7 +96,7 @@ class Acl
      */
     private function getCachedPermissions(): bool
     {
-        $serial_permissions = Cache::get('acl:' . $this->user_id . ':' . $this->session_id);
+        $serial_permissions = Cache::tags(['acl', 'acl:' . $this->user_id])->get('acl:' . $this->user_id . ':' . $this->session_id);
         if (! $serial_permissions) {
             return false;
         }
@@ -145,7 +145,7 @@ class Acl
         ];
 
         // Store it in cache for a day.
-        Cache::put('acl:' . $this->user_id . ':' . $this->session_id, \serialize($permissions), 86400);
+        Cache::tags(['acl', 'acl:' . $this->user_id])->put('acl:' . $this->user_id . ':' . $this->session_id, \serialize($permissions), 86400);
     }
 
     /**

@@ -5,6 +5,7 @@ namespace Metrix\LaravelPermissions;
 use Illuminate\Auth\Events\Authenticated;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
+use Metrix\LaravelPermissions\Console\ClearPermissionCache;
 
 /**
  *  Laravel Permissions Service Provider
@@ -18,43 +19,17 @@ class LaravelPermissionsServiceProvider extends ServiceProvider
      */
     public function boot(Acl $acl)
     {
-        $this->app['events']->listen(Authenticated::class, function ($e) use($acl) {
+        $this->app['events']->listen(Authenticated::class, function ($event) use ($acl) {
             $acl->boot(Auth::id());
         });
 
-
-        /*
-         * Optional methods to load your package assets
-         */
-        // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'laravel-permissions');
-        // $this->loadViewsFrom(__DIR__.'/../resources/views', 'laravel-permissions');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        // $this->loadRoutesFrom(__DIR__.'/routes.php');
-
         if ($this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__ . '/../config/config.php' => config_path('laravel-permissions.php'),
-            ], 'config');
-
             $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
-            // Publishing the views.
-            /*$this->publishes([
-                __DIR__.'/../resources/views' => resource_path('views/vendor/laravel-permissions'),
-            ], 'views');*/
-
-            // Publishing assets.
-            /*$this->publishes([
-                __DIR__.'/../resources/assets' => public_path('vendor/laravel-permissions'),
-            ], 'assets');*/
-
-            // Publishing the translation files.
-            /*$this->publishes([
-                __DIR__.'/../resources/lang' => resource_path('lang/vendor/laravel-permissions'),
-            ], 'lang');*/
-
             // Registering package commands.
-            // $this->commands([]);
+            $this->commands([
+                ClearPermissionCache::class,
+            ]);
         }
     }
 
@@ -63,9 +38,6 @@ class LaravelPermissionsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // Automatically apply the package configuration
-        // $this->mergeConfigFrom(__DIR__ . '/../config/config.php', 'laravel-permissions');
-
         // Register the main class to use with the facade
         $this->app->singleton(Acl::class, function () {
             return new Acl();
