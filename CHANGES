@@ -1,0 +1,17 @@
+Version 0.1.0
+ - Add a note to ReadMe regarding still under development.
+ - Merge branch 'develop'
+ - Add in tags to cache. Add in console command to clear cached permissions.
+ - Merge branch 'develop'
+ - Fix singleton
+ - Merge branch 'develop'
+ - Fix migrations
+ - Fix the Acl Facade
+ - Add in a Role Factory Update the ReadMe
+ - Do not commit composer lock
+ - First working tests
+ - Add test case
+ - Update base namespace.
+ - Initial commit.  Just some boilerplate stuff.
+ - Initial commit
+
