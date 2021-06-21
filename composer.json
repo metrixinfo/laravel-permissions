@@ -37,7 +37,7 @@
         "psr-4": {
             "Metrix\\LaravelPermissions\\Tests\\Database\\Factories\\": "tests/database/factories",
             "Metrix\\LaravelPermissions\\Tests\\": "tests",
-            "App\\Models\\": "src/app/Models"
+            "App\\": "app"
         }
     },
     "scripts": {

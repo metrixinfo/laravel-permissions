@@ -8,7 +8,7 @@
 You may assign zero or many roles to a user, and they will inherit the permissions assigned to those roles.
 You may also assign specific permissions to a specific user. 
 
-A user's permissions are cached 
+A user's permissions are cached for increased performance. 
 
 ## Requirements
 This package will only work with a cache that allows tags (Redis, Memcached etc.). 
@@ -18,6 +18,11 @@ This package will only work with a cache that allows tags (Redis, Memcached etc.
 You can install the package via composer:
 ```bash
 composer require metrixinfo/laravel-permissions
+```
+
+Publish the configuration by running the following artisan command:
+```bash
+php artisan vendor:publish --provider="Metrix\LaravelPermissions\LaravelPermissionsServiceProvider" --tag="permissions"
 ```
 
 Run the migrations to create the required tables.
@@ -112,16 +117,10 @@ protected function gate()
 }
 ```
 
-## Publishing the configuration file
-You can publish the configuration file by running the following artisan command:
-```bash
-php artisan vendor:publish --provider="Metrix\LaravelPermissions\LaravelPermissionsServiceProvider" --tag="permissions"
-```
-
-## Console Command
+## Console Commands
 Console commands are provided to help manage your permissions. 
 
-You can flush all the permissions:
+You can flush all the cached permissions:
 ```bash
 php artisan acl:clear
 ```
@@ -130,23 +129,14 @@ or only the permissions belonging to a specific user.
 php artisan acl:clear -u 212
 ```
 
-You can also add, edit, delete assign, revoke and audit permissions using the permissions command.
+You may manage permissions using the acl:permissions artisan command.
 ```bash
 php artisan acl:permissions
 ```
 
-It will present you with a menu to allow yo to perform different permission actions.
-
+You may manage roles using the acl:roles artisan command.
 ```bash
- What would you like to do?:
-  [1] List Permissions
-  [2] Create Permission
-  [3] Edit Permission
-  [4] Delete Permission
-  [5] Assign Permission
-  [6] Revoke Permission
-  [7] Audit Permissions
-  [0] Quit
+php artisan acl:roles
 ```
 
 ### Changelog

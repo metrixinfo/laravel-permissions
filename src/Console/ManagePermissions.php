@@ -9,7 +9,7 @@ use Metrix\LaravelPermissions\Models\Permission;
 use Metrix\LaravelPermissions\Models\Role;
 
 /**
- *  Add or Delete permissions
+ *  Create, Edit or Delete permissions
  */
 class ManagePermissions extends Command
 {
@@ -352,7 +352,7 @@ class ManagePermissions extends Command
             $table[] = [
                 'id' => $permission->id,
                 'area' => $permission->area,
-                'action' => $this->actionsString($permission->pivot->actions),
+                'action' => Permission::actionsString($permission->pivot->actions),
             ];
         }
 
@@ -381,7 +381,7 @@ class ManagePermissions extends Command
             $table[$permission->id] = [
                 'id' => $permission->id,
                 'area' => $permission->area,
-                'action' => $this->actionsString($permission->pivot->actions),
+                'action' => Permission::actionsString($permission->pivot->actions),
             ];
         }
 
@@ -391,7 +391,7 @@ class ManagePermissions extends Command
                 $table[$permission->id] = [
                     'id' => $permission->id,
                     'area' => $permission->area,
-                    'action' => $this->actionsString($permission->pivot->actions),
+                    'action' => Permission::actionsString($permission->pivot->actions),
                 ];
             }
         }
@@ -400,35 +400,5 @@ class ManagePermissions extends Command
             ['Id', 'Area', 'Action'],
             $table
         );
-    }
-
-    /**
-     * Return a string representation of actions
-     *
-     * @param $actions
-     *
-     * @return string
-     */
-    private function actionsString($actions): string
-    {
-        $permitted = [];
-
-        if (Permission::PERMISSION_READ & $actions) {
-            $permitted[] = 'Read';
-        }
-
-        if (Permission::PERMISSION_WRITE & $actions) {
-            $permitted[] = 'Write';
-        }
-
-        if (Permission::PERMISSION_EDIT & $actions) {
-            $permitted[] = 'Edit';
-        }
-
-        if (Permission::PERMISSION_DELETE & $actions) {
-            $permitted[] = 'Delete';
-        }
-
-        return implode(', ', $permitted);
     }
 }

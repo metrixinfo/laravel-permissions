@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Metrix\LaravelPermissions\Database\Factories\PermissionFactory;
-use Metrix\LaravelPermissions\Models\Role;
 
 /**
  * Permission Model
@@ -72,10 +71,10 @@ class Permission extends Model
     }
 
     /*
-|--------------------------------------------------------------------------
-| Model Relationships - Method names use snake_case
-|--------------------------------------------------------------------------
-*/
+    |--------------------------------------------------------------------------
+    | Model Relationships - Method names use snake_case
+    |--------------------------------------------------------------------------
+    */
 
     // phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 
@@ -100,4 +99,40 @@ class Permission extends Model
     }
 
     // phpcs:enable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+
+    /*
+    |--------------------------------------------------------------------------
+    | Model Methods
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * Return a string representation of actions
+     *
+     * @param int|null $actions
+     *
+     * @return string
+     */
+    public static function actionsString(?int $actions): string
+    {
+        $permitted = [];
+
+        if (Permission::PERMISSION_READ & $actions) {
+            $permitted[] = 'Read';
+        }
+
+        if (Permission::PERMISSION_WRITE & $actions) {
+            $permitted[] = 'Write';
+        }
+
+        if (Permission::PERMISSION_EDIT & $actions) {
+            $permitted[] = 'Edit';
+        }
+
+        if (Permission::PERMISSION_DELETE & $actions) {
+            $permitted[] = 'Delete';
+        }
+
+        return implode(', ', $permitted);
+    }
 }

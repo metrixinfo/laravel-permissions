@@ -3,11 +3,12 @@
  *   phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 */
 
-namespace Metrix\LaravelPermissions\Tests;
+namespace Metrix\LaravelPermissions\Tests\Unit;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Metrix\LaravelPermissions\Models\Permission;
+use Metrix\LaravelPermissions\Tests\TestCase;
 
 /**
  * Class PermissionUserTest

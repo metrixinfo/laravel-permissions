@@ -6,8 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * Class UserFactory
- * @package Metrix\LaravelPermissions\Tests\Database\Factories
+ * User Factory
  */
 class UserFactory extends Factory
 {

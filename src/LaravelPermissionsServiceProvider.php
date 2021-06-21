@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use Metrix\LaravelPermissions\Console\ClearPermissionCache;
 use Metrix\LaravelPermissions\Console\ManagePermissions;
+use Metrix\LaravelPermissions\Console\ManageRoles;
 
 /**
  *  Laravel Permissions Service Provider
@@ -35,6 +36,7 @@ class LaravelPermissionsServiceProvider extends ServiceProvider
             $this->commands([
                 ClearPermissionCache::class,
                 ManagePermissions::class,
+                ManageRoles::class,
             ]);
         }
     }

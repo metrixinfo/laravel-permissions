@@ -2,6 +2,7 @@
 
 namespace Metrix\LaravelPermissions\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,6 +19,7 @@ use Metrix\LaravelPermissions\Database\Factories\RoleFactory;
  * @property string $filter
  *
  * @property Collection $permissions
+ * @property Collection $roles
  *
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
@@ -87,7 +89,7 @@ class Role extends Model
      */
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'user_roles');
+        return $this->belongsToMany(User::class);
     }
 
     /**
