@@ -1,3 +1,6 @@
+Version 0.1.2:
+ - Add an artisan command to manage roles.
+
 Version 0.1.1:
  - Add artisan command to manage permissions (acl:permissions).
 
