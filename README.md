@@ -11,7 +11,8 @@ You may also assign specific permissions to a specific user.
 A user's permissions are cached for increased performance. 
 
 ## Requirements
-This package will only work with a cache that allows tags (Redis, Memcached etc.). 
+- PHP 7.4
+- Laravel 7.x
 
 ## Installation
 

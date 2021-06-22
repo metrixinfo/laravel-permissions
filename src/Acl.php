@@ -61,9 +61,19 @@ class Acl
     private ?string $filter = null;
 
     /**
+     * @var string
+     */
+    private string $cache_key;
+
+    /**
      * @var int;
      */
     private int $cache_ttl = 86400;
+
+    /**
+     * @var bool
+     */
+    private bool $cache_tagging = true;
 
 
     /**
@@ -72,6 +82,7 @@ class Acl
     public function __construct()
     {
         $this->cache_ttl = \config('permissions.cache_ttl', 86400);
+        $this->cache_tagging = \config('permissions.cache_tagging', true);
     }
 
     /**
@@ -94,6 +105,8 @@ class Acl
             return;
         }
 
+        $this->cache_key = 'acl:' . $this->user_id . ':' . $this->session_id;
+
         $permissions = $this->getCachedPermissions();
         if (! $permissions) {
             $this->refreshPermissions();
@@ -109,7 +122,12 @@ class Acl
      */
     private function getCachedPermissions(): bool
     {
-        $serial_permissions = Cache::tags(['acl', 'acl:' . $this->user_id])->get('acl:' . $this->user_id . ':' . $this->session_id);
+        if ($this->cache_tagging) {
+            $serial_permissions = Cache::tags(['acl', 'acl:' . $this->user_id])->get($this->cache_key);
+        } else {
+            $serial_permissions = Cache::get($this->cache_key);
+        }
+
         if (! $serial_permissions) {
             return false;
         }
@@ -157,8 +175,11 @@ class Acl
             'roles'              => $this->roles,
         ];
 
-        // Store it in cache for a day.
-        Cache::tags(['acl', 'acl:' . $this->user_id])->put('acl:' . $this->user_id . ':' . $this->session_id, \serialize($permissions), $this->cache_ttl);
+        if ($this->cache_tagging) {
+            Cache::tags(['acl', 'acl:' . $this->user_id])->put($this->cache_key, \serialize($permissions), $this->cache_ttl);
+        } else {
+            Cache::put($this->cache_key, \serialize($permissions), $this->cache_ttl);
+        }
     }
 
     /**

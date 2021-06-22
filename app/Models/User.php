@@ -8,13 +8,14 @@ use Illuminate\Notifications\Notifiable;
 use Metrix\LaravelPermissions\Tests\Database\Factories\UserFactory;
 use Metrix\LaravelPermissions\Traits\HasPermissions;
 use Metrix\LaravelPermissions\Traits\HasRoles;
+use Metrix\LaravelPermissions\Traits\HasUserGroup;
 
 /**
  * Stub User class for testing
  */
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasPermissions, HasRoles;
+    use HasFactory, Notifiable, HasPermissions, HasRoles, HasUserGroup;
 
     /**
      * The attributes that are mass assignable.

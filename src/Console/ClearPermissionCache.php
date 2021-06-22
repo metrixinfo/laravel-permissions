@@ -24,6 +24,17 @@ class ClearPermissionCache extends Command
      */
     protected $description = 'Clear all cached user and role permissions from the cache.';
 
+    /**
+     * @var bool
+     */
+    private $cache_tagging = true;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->cache_tagging = \config('permissions.cache_tagging', true);
+    }
 
     /**
      * Execute the console command.
@@ -34,13 +45,43 @@ class ClearPermissionCache extends Command
     {
         $user_id = $this->option('user_id');
         if (!$user_id) {
-            if ($this->confirm('This will delete the cached permission for ALL users. Are you sure?')) {
-                Cache::tags(['acl'])->flush();
-                $this->info('All permissions have been flushed from the cache.');
-            }
+            $result = $this->flushAllPermissions();
         } else {
+            $result = $this->flushUserPermissions($user_id);
+        }
+
+        if ($result) {
+            $this->info('Permissions have been flushed from the cache.');
+        } else {
+            $this->info('Failed to flush permissions.');
+        }
+    }
+
+    /**
+     * Flush ALL permissions from the cache.
+     */
+    private function flushAllPermissions(): bool
+    {
+        if (!$this->confirm('This will delete the cached permission for ALL users. Are you sure?')) {
+            return false;
+        }
+
+        if ($this->cache_tagging) {
+            return Cache::tags(['acl'])->flush();
+        } else {
+            $this->warn('Only caches with tagging can be cleared.');
+        }
+    }
+
+    /**
+     *
+     */
+    private function flushUserPermissions($user_id): bool
+    {
+        if ($this->cache_tagging) {
             Cache::tags(['acl:' . $user_id])->flush();
-            $this->info('Permissions for user ' . $user_id . ' have been flushed from the cache.');
+        } else {
+            $this->warn('Only caches with tagging can be cleared.');
         }
     }
 }
