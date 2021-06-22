@@ -11,8 +11,8 @@ You may also assign specific permissions to a specific user.
 A user's permissions are cached for increased performance. 
 
 ## Requirements
-- PHP 7.4
-- Laravel 7.x
+- PHP 7.4|8.0
+- Laravel 7.x|8.x
 
 ## Installation
 
