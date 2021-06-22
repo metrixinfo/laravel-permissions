@@ -1,3 +1,6 @@
+Version 0.2.0:
+ - Add user groups. Allow with caches without tagging.
+
 Version 0.1.2:
  - Add an artisan command to manage roles.
 
