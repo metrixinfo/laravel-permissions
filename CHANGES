@@ -1,3 +1,6 @@
+Version 0.2.1:
+ - Allow group id to be null.
+
 Version 0.2.0:
  - Add user groups. Allow with caches without tagging.
 
