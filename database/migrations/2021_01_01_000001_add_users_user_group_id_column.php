@@ -5,9 +5,9 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 /**
- * UpdateUsersTable
+ * Add user_group_id column to users.
  */
-class AddUsersUserGroupId extends Migration
+class AddUsersUserGroupIdColumn extends Migration
 {
     private $table_name = 'users';
     private $group_column_name = 'user_group_id';
@@ -22,7 +22,7 @@ class AddUsersUserGroupId extends Migration
         if (!Schema::hasColumn($this->table_name, $this->group_column_name)) {
             Schema::disableForeignKeyConstraints();
             Schema::table($this->table_name, function (Blueprint $table) {
-                $table->foreignId($this->group_column_name);
+                $table->foreignId($this->group_column_name)->nullable();
                 $table->foreign('user_group_id')
                     ->references('id')
                     ->on('user_groups')
